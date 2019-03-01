@@ -3450,6 +3450,271 @@ client.on('message', async message => {
     }
 });
 
+if(!prefix) var prefix = "$" ; 
+ 
+var stopReacord = true;
+var reactionRoles = [];
+var definedReactionRole = null;
+ 
+client.on("message", async message => {
+    const args = message.content.slice(prefix.length).trim().split(/ +/g);
+    const command = args.shift().toLowerCase();
+    if(message.author.bot) return;
+    if(message.content.indexOf(prefix) !== 0) return;
+    if (command == "autoc") {
+      if(!message.channel.guild) return message.reply(`**this ~~command~~ __for servers only__**`);
+      if(!message.member.hasPermission("ADMINISTRATOR")) return message.channel.send("sorry you can't do this");
+      if(!args[0] || args[1]) return message.channel.send(`\`\`\`${prefix}autoC <role-name>\`\`\``);
+      var role = message.guild.roles.find( role => { return role.name == args[0] });
+      if(!role) return message.channel.send(`no role with name ${definedRoleName} found, make sure you entered correct name`);
+      if(definedReactionRole != null  || !stopReacord) return message.channel.send("another reaction role request is running");
+      message.channel.send(`now go and add reaction in the message you want for role ${role.name}`);
+      definedReactionRole = role;
+      stopReacord = false;
+    }    
+})
+client.on('raw', raw => {
+  if (!['MESSAGE_REACTION_ADD', 'MESSAGE_REACTION_REMOVE'].includes(raw.t)) return;
+  var channel = client.channels.get(raw.d.channel_id);
+  if (channel.messages.has(raw.d.message_id)) return;
+  channel.fetchMessage(raw.d.message_id).then(message => {
+    var reaction = message.reactions.get( (raw.d.emoji.id ? `${raw.d.emoji.name}:${raw.d.emoji.id}` : raw.d.emoji.name) );
+    if (raw.t === 'MESSAGE_REACTION_ADD') return client.emit('messageReactionAdd', reaction, client.users.get(raw.d.user_id));
+    if (raw.t === 'MESSAGE_REACTION_REMOVE') return client.emit('messageReactionRemove', reaction, client.users.get(raw.d.user_id));
+  });
+});
+client.on('messageReactionAdd', (reaction, user) => {
+    if(user.id == client.user.id) return;
+    if(!stopReacord) {
+      var done = false;
+      reactionRoles[reaction.message.id] = { role: definedReactionRole, message_id: reaction.message.id, emoji: reaction.emoji};
+      stopReacord =  true;
+      definedReactionRole = null;
+      reaction.message.react(reaction.emoji.name)
+      .catch(err => {done = true; reaction.message.channel.send(`sorry i can't use this emoji but the reaction role done! anyone react will get the role!`)})
+      if(done) reaction.remove(user);
+    } else {
+      var request = reactionRoles[reaction.message.id];
+      if(!request) return;
+      if(request.emoji.name != reaction.emoji.name) return reaction.remove(user);
+      reaction.message.guild.members.get(user.id).addRole(request.role);
+    }
+})
+client.on('messageReactionRemove', (reaction, user) => {
+  if(user.id == client.user.id) return;
+  if(!stopReacord) return;
+  let request = reactionRoles[reaction.message.id];
+  if(!request) return;
+  reaction.message.guild.members.get(user.id).removeRole(request.role);
+});
+var prefix = "$"
+
+client.on('message', message => {
+ 
+    if(message.content.startsWith(prefix + 'rep')) {
+      if(!message.channel.guild) return;
+                    moment.locale('en');
+                  var getvalueof = message.mentions.users.first()
+                    if(!getvalueof) return message.channel.send(`**:mag: |  ${message.author.username}, the user could not be found.    **`);
+                       if(getvalueof.id == message.author.id) return message.channel.send(`**${message.author.username}, you cant give yourself a reputation !**`)
+    if(profile[message.author.id].reps != moment().format('L')) {
+            profile[message.author.id].reps = moment().format('L');
+            profile[getvalueof.id].rep = Math.floor(profile[getvalueof.id].rep+1);
+         message.channel.send(`** :up:  |  ${message.author.username} has given ${getvalueof} a reputation point!**`)
+        } else {
+         message.channel.send(`**:stopwatch: |  ${message.author.username}, you can raward more reputation  ${moment().endOf('day').fromNow()} **`)
+        }
+       }
+});
+var prefix = "$"
+
+
+const weather = require('weather-js');//npm install weather-js
+client.on('message', message => {
+    let msg = message.content.toUpperCase(); 
+    let cont = message.content.slice(prefix.length).split(" "); 
+    let args = cont.slice(1); 
+    if (msg.startsWith(prefix + 'weather')) { 
+
+        weather.find({search: args.join(" "), degreeType: 'F'}, function(err, result) {
+            if (err) message.channel.send(err);
+
+            
+            if (result.length === 0) {
+                message.channel.send('**Please enter a valid location.**').
+                return; 
+            }
+
+           
+            var current = result[0].current; 
+            var location = result[0].location; 
+
+           
+            const embed = new Discord.RichEmbed()
+.setDescription(`**${current.skytext}**`) 
+                .setAuthor(`Weather for ${current.observationpoint}`) 
+                .setThumbnail(current.imageUrl) 
+                .setColor(0x00AE86) 
+                .addField('Timezone',`UTC${location.timezone}`, true) 
+                .addField('Degree Type',location.degreetype, true)
+                .addField('Temperature',`${current.temperature} Degrees`, true)
+                .addField('Feels Like', `${current.feelslike} Degrees`, true)
+                .addField('Winds',current.winddisplay, true)
+                .addField('Humidity', `${current.humidity}%`, true)
+
+                
+                message.channel.send({embed});
+        });
+    }
+
+});
+
+const hastebin = require('hastebin-gen');
+client.on('message', message => {
+var PREFIX = '$';
+    if(message.content.startsWith(PREFIX + 'dis')) {
+            var args = message.content.split(' ').slice(1).join(' ');
+}
+      var array = [];
+      var i = 0;
+      if(args){
+client.users.filter(u => u.discriminator == args).map(u => {
+    if(i > 4){
+     return;
+    }
+    i = i + 1;
+ 
+   array.push(`${u.tag}`);
+});
+}
+hastebin(`${array.slice(0, 30).join('\n')}`, 'txt').then(l => {
+    message.channel.send(`${l}`);
+}).catch(console.error);
+});
+client.on('message' , message => {
+var PREFIX = '$';
+if(message.content === `${PREFIX}dis         `         ) {
+                      let array = [];
+                      var i = 0;
+client.users.filter(u => u.discriminator == message.author.discriminator).map(u => {
+    if(i > 4){
+     return;
+    }
+    i = i + 1;
+   array.push(`${u.tag}`);
+});
+hastebin(`${array.slice(0, 30).join('\n')}`, 'txt').then(l => {
+    message.channel.send(`${l}`);
+}).catch(console.error);
+ 
+        }
+});
+
+client.on('message', msg => {
+  if(msg.content === '!hide') {
+    msg.guild.channels.forEach(c => {
+      c.overwritePermissions(msg.guild.id, {
+        SEND_MESSAGES: false,
+        READ_MESSAGES: false
+      })
+    })
+    msg.channel.send('.')
+  }
+})
+
+ 
+var prefix = "$"
+const moment = require('moment');
+client.on('message',async message => {
+  var time = moment().format('Do MMMM YYYY , hh:mm');
+  var room;
+  var title;
+  var duration;
+  var gMembers;
+  var currentTime = new Date(),
+hours = currentTime.getHours() + 3 ,
+minutes = currentTime.getMinutes(),
+done = currentTime.getMinutes() + duration / 60000 ,
+seconds = currentTime.getSeconds();
+if (minutes < 10) {
+minutes = "0" + minutes;
+}
+var suffix = "AM";
+if (hours >= 12) {
+suffix = "PM";
+hours = hours - 12;
+}
+if (hours == 0) {
+hours = 12;
+}
+
+  var filter = m => m.author.id === message.author.id;
+  if(message.content.startsWith(prefix + "giveaway")) {
+
+    if(!message.guild.member(message.author).hasPermission('MANAGE_GUILD')) return message.channel.send(':heavy_multiplication_x:| **يجب أن يكون لديك خاصية التعديل على السيرفر**');
+    message.channel.send(`:eight_pointed_black_star:| **Send Name channel For the Giveaway**`).then(msg => {
+      message.channel.awaitMessages(filter, {
+        max: 1,
+        time: 20000,
+        errors: ['time']
+      }).then(collected => {
+        let room = message.guild.channels.find('name' , collected.first().content);
+        if(!room) return message.channel.send(':heavy_multiplication_x:| **i Found It :(**');
+        room = collected.first().content;
+        collected.first().delete();
+        msg.edit(':eight_pointed_black_star:| **Time For The Giveaway**').then(msg => {
+          message.channel.awaitMessages(filter, {
+            max: 1,
+            time: 20000,
+            errors: ['time']
+          }).then(collected => {
+            if(isNaN(collected.first().content)) return message.channel.send(':heavy_multiplication_x:| **The Time Be Nambers `` Do the Commend Agin``**');
+            duration = collected.first().content * 60000;
+            collected.first().delete();
+            msg.edit(':eight_pointed_black_star:| **Now send The Present **').then(msg => {
+              message.channel.awaitMessages(filter, {
+                max: 1,
+                time: 20000,
+                errors: ['time']
+              }).then(collected => {
+                title = collected.first().content;
+                collected.first().delete();
+                msg.delete();
+                message.delete();
+                try {
+                  let giveEmbed = new Discord.RichEmbed()
+                  .setDescription(`**${title}** \nReact With 🎉 To Enter! \nTime remaining : ${duration / 60000} **Minutes**\n **Created at :** ${hours}:${minutes}:${seconds} ${suffix}`)
+                  .setFooter(message.author.username, message.author.avatarURL);
+                  message.guild.channels.find("name" , room).send(' :heavy_check_mark: **Giveaway Created** :heavy_check_mark:' , {embed: giveEmbed}).then(m => {
+                     let re = m.react('🎉');
+                     setTimeout(() => {
+                       let users = m.reactions.get("🎉").users;
+                       let list = users.array().filter(u => u.id !== m.author.id !== client.user.id);
+                       let gFilter = list[Math.floor(Math.random() * list.length) + 0]
+                       let endEmbed = new Discord.RichEmbed()
+                       .setAuthor(message.author.username, message.author.avatarURL)
+                       .setTitle(title)
+                       .addField('Giveaway Ended !🎉',`Winners : ${gFilter} \nEnded at :`)
+                       .setTimestamp()
+					 m.edit('** 🎉 GIVEAWAY ENDED 🎉**' , {embed: endEmbed});
+					message.guild.channels.find("name" , room).send(`**Congratulations ${gFilter}! You won The \`${title}\`**` , {embed: {}})
+                     },duration);
+                   });
+                } catch(e) {
+                message.channel.send(`:heavy_multiplication_x:| **i Don't Have Prem**`);
+                  console.log(e);
+                }
+              });
+            });
+          });
+        });
+      });
+    });
+  }
+});
+
+
+
 client.login(process.env.BOT_TOKEN);
  
 
