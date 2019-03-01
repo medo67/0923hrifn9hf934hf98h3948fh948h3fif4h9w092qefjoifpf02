@@ -3450,7 +3450,7 @@ client.on('message', async message => {
     }
 });
 
-if var prefix = "$" ; 
+ var prefix = "$" ; 
  
 var stopReacord = true;
 var reactionRoles = [];
