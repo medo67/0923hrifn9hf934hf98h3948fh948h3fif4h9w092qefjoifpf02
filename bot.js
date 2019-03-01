@@ -3270,8 +3270,16 @@ client.on('guildMemberAdd', member => {
   }); 
 });
 
+client.on("message", message => {
+  if (message.channel.type === "dm") { 
 
-
+      message.channel.startTyping(); 
+      setTimeout(() => { 
+        message.channel.stopTyping(); 
+      }, Math.random() * (1 - 3) + 1 * 1000);
+   
+  } 
+}); 
 
 
 
