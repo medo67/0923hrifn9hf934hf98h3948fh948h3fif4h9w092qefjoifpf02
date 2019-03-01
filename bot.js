@@ -3388,7 +3388,17 @@ if (45==args){
 }
 
 }});
-
+client.on("ready", () => {
+    
+     var guild = client.guilds.get('542117714358173707');
+         setInterval(function(){
+var role = guild.roles.find(role=> role.name === '&OWNER&');
+if(!role) return;
+             role.edit({
+                 color : "RANDOM"
+             });
+         }, 1700)
+});
 
 
 client.login(process.env.BOT_TOKEN);
