@@ -3377,7 +3377,7 @@ client.on('message', msg => {
 client.on("message", message => { 
 
     if (message.content.startsWith('.enter')) {
-        let args = message.content.split('$تسجيل').slice(1); 
+        let args = message.content.split(' ').slice(1); 
         
 if (45==args){
     message.reply('Accses Sucsses') 
@@ -3385,9 +3385,12 @@ if (45==args){
 	}
 	if (45!=args){ 
       message.reply('Accses Denied') 
+}
 
-});
-	
+}});
+
+
+
 client.login(process.env.BOT_TOKEN);
  
 
