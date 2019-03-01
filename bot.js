@@ -3290,8 +3290,7 @@ client.on('message', msg => {
 });
 
 
-client.on("message", message => {
-  if (message.channel.type === "dm") { 
+
 
 client.on('message', msg => {
   if (msg.content === 'كسمك') {
@@ -3307,9 +3306,73 @@ client.on('message', msg => {
 });
 
 
+client.on('message', msg => {
+  if (msg.content === 'هلا') {
+    msg.reply('هلا وغلا');
+  }
+});
 
 
+client.on('message', msg => {
+  if (msg.content === 'كيف حالك؟') {
+    msg.reply('الحمدلله');
+  }
+});
+
+
+client.on('message', msg => {
+  if (msg.content === '@Jack Bot') {
+    msg.reply('لا تمنشن يا أخي');
+  }
+});
 	
+
+client.on('message', msg => {
+  if (msg.content === 'يارجل؟') {
+    msg.reply('ياعجوز');
+  }
+});
+
+
+client.on('message', msg => {
+  if (msg.content === 'يا راجل') {
+    msg.reply('انا بوت');
+  }
+});
+
+
+client.on('message', msg => {
+  if (msg.content === 'من الي صانعك؟') {
+    msg.reply('جاك');
+  }
+});
+
+
+client.on('message', msg => {
+  if (msg.content === 'جاك الي صنعك؟') {
+    msg.reply('يب');
+  }
+});
+
+client.on('message', msg => {
+  if (msg.content === 'احبك') {
+    msg.reply('حبك برص');
+  }
+});
+
+
+client.on('message', msg => {
+  if (msg.content === 'ابي انيكك') {
+    msg.reply('عندك امك علفكرا');
+  }
+});
+
+
+client.on('message', msg => {
+  if (msg.content === 'يلبوة') {
+    msg.reply('يابن اللبوة');
+  }
+});
 	
 client.login(process.env.BOT_TOKEN);
  
