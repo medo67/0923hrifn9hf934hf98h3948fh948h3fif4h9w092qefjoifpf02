@@ -3451,7 +3451,7 @@ client.on('message', async message => {
 });
 
 
-var prefix = "$"
+
 
 client.on('message', message => {
  
@@ -3470,7 +3470,7 @@ client.on('message', message => {
         }
        }
 });
-var prefix = "$"
+
 
 
 const weather = require('weather-js');//npm install weather-js
