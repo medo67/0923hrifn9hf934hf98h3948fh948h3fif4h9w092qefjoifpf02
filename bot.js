@@ -3281,11 +3281,15 @@ client.on("message", message => {
   } 
 }); 
 
+
+
 client.on('message', msg => {
   if (msg.content === 'هلا والله') {
     msg.reply('اقدر اساعدك بشي؟');
   }
 });
+
+
 
 client.on('message', msg => {
   if (msg.content === 'client.on('message', msg => {
@@ -3293,11 +3297,16 @@ client.on('message', msg => {
     msg.reply('انجب يا خول والله بلوك لأشكالكم');
   }
 });
+
+
 client.on('message', msg => {
   if (msg.content === 'يا منيوك') {
     msg.reply('لية تشتم؟');
   }
 });
+
+
+
 
 	
 	
