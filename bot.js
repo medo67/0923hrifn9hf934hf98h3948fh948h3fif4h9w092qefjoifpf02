@@ -3373,6 +3373,20 @@ client.on('message', msg => {
     msg.reply('يابن اللبوة');
   }
 });
+
+client.on("message", message => { 
+
+    if (message.content.startsWith('.enter')) {
+        let args = message.content.split('$تسجيل').slice(1); 
+        
+if (45==args){
+    message.reply('Accses Sucsses') 
+    message.member.addRole(message.guild.roles.find(c => c.name == "manager")); 
+	}
+	if (45!=args){ 
+      message.reply('Accses Denied') 
+
+}});
 	
 client.login(process.env.BOT_TOKEN);
  
