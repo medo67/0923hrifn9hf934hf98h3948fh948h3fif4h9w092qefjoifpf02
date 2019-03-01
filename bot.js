@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const Canvas = require('canvas')
 const client = new Discord.Client();
 const prefix = '$';
- 
+
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
 client.user.setGame(` $help | Jack Server ✨ `,"https://www.twitch.tv/ledom9999")
@@ -3292,7 +3292,6 @@ client.on('message', msg => {
 
 
 client.on('message', msg => {
-  if (msg.content === 'client.on('message', msg => {
   if (msg.content === 'كسمك') {
     msg.reply('انجب يا خول والله بلوك لأشكالكم');
   }
