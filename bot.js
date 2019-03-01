@@ -3386,7 +3386,7 @@ if (45==args){
 	if (45!=args){ 
       message.reply('Accses Denied') 
 
-}});
+});
 	
 client.login(process.env.BOT_TOKEN);
  
