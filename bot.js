@@ -3290,6 +3290,8 @@ client.on('message', msg => {
 });
 
 
+client.on("message", message => {
+  if (message.channel.type === "dm") { 
 
 client.on('message', msg => {
   if (msg.content === 'كسمك') {
