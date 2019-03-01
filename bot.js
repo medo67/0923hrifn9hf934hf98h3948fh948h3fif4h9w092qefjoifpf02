@@ -3514,6 +3514,7 @@ client.on('message', message => {
 });
 
 
+const hastebin = require('hastebin-gen');
 client.on('message', message => {
 var PREFIX = '$';
     if(message.content.startsWith(PREFIX + 'dis')) {
