@@ -3425,7 +3425,7 @@ message.channel.send(`**${message.author.username}, your :credit_card: balance i
 });
 
 client.on('message', async message => {
-    let amount = 5000000000000000000000000000000000000000000000000000000;
+    let amount = 50000000000;
     if(message.content.startsWith(prefix + "daily")) {
     if(message.author.bot) return;
     if(coolDown.has(message.author.id)) return message.channel.send(`**:stopwatch: | ${message.author.username}, your daily :yen: credits refreshes in \`\`1 Day\`\`.**`);
@@ -3473,90 +3473,8 @@ client.on('message', message => {
 
 
 
-const weather = require('weather-js');//npm install weather-js
-client.on('message', message => {
-    let msg = message.content.toUpperCase(); 
-    let cont = message.content.slice(prefix.length).split(" "); 
-    let args = cont.slice(1); 
-    if (msg.startsWith(prefix + 'weather')) { 
 
-        weather.find({search: args.join(" "), degreeType: 'F'}, function(err, result) {
-            if (err) message.channel.send(err);
-
-            
-            if (result.length === 0) {
-                message.channel.send('**Please enter a valid location.**').
-                return; 
-            }
-
-           
-            var current = result[0].current; 
-            var location = result[0].location; 
-
-           
-            const embed = new Discord.RichEmbed()
-.setDescription(`**${current.skytext}**`) 
-                .setAuthor(`Weather for ${current.observationpoint}`) 
-                .setThumbnail(current.imageUrl) 
-                .setColor(0x00AE86) 
-                .addField('Timezone',`UTC${location.timezone}`, true) 
-                .addField('Degree Type',location.degreetype, true)
-                .addField('Temperature',`${current.temperature} Degrees`, true)
-                .addField('Feels Like', `${current.feelslike} Degrees`, true)
-                .addField('Winds',current.winddisplay, true)
-                .addField('Humidity', `${current.humidity}%`, true)
-
-                
-                message.channel.send({embed});
-        });
-    }
-
-});
-
-
-const hastebin = require('hastebin-gen');
-client.on('message', message => {
-var PREFIX = '$';
-    if(message.content.startsWith(PREFIX + 'dis')) {
-            var args = message.content.split(' ').slice(1).join(' ');
-}
-      var array = [];
-      var i = 0;
-      if(args){
-client.users.filter(u => u.discriminator == args).map(u => {
-    if(i > 4){
-     return;
-    }
-    i = i + 1;
- 
-   array.push(`${u.tag}`);
-});
-}
-hastebin(`${array.slice(0, 30).join('\n')}`, 'txt').then(l => {
-    message.channel.send(`${l}`);
-}).catch(console.error);
-});
-client.on('message' , message => {
-var PREFIX = '$';
-if(message.content === `${PREFIX}dis         `         ) {
-                      let array = [];
-                      var i = 0;
-client.users.filter(u => u.discriminator == message.author.discriminator).map(u => {
-    if(i > 4){
-     return;
-    }
-    i = i + 1;
-   array.push(`${u.tag}`);
-});
-hastebin(`${array.slice(0, 30).join('\n')}`, 'txt').then(l => {
-    message.channel.send(`${l}`);
-}).catch(console.error);
- 
-        }
-});
-
-
-
+c
 
 client.login(process.env.BOT_TOKEN);
  
