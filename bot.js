@@ -3541,6 +3541,7 @@ ${videos.map(video2 => `[**${++index} **] \`${video2.title}\``).join('\n')}`)
 							time: 10000,
 							errors: ['time']
 						});
+
 					} catch (err) {
 						console.error(err);
 						return msg.channel.send('لم يتم تحديد العدد لتشغيل القران.');
@@ -3602,8 +3603,14 @@ ${serverQueue.songs.map(song => `**${++index} -** ${song.title}`).join('\n')}
 		return msg.channel.send('لا يوجد شيء حالي في العمل.');
 	}
 
+
 	return undefined;
+
+
 });
+
+
+
 
 async function handleVideo(video, msg, voiceChannel, playlist = false) {
 	const serverQueue = queue.get(msg.guild.id);
@@ -3690,6 +3697,7 @@ client.on('message', message => {
 **Channels**📚 **__${client.channels.size}__** `)
              message.channel.sendEmbed(embed);
          }
+
 });
 
 var adkar = [
