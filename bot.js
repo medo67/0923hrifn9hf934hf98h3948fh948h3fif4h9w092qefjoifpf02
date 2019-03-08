@@ -5,7 +5,6 @@ const prefix = '$';
 
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
-client.user.setGame(` $help | Jack Server ✨ `,"https://www.twitch.tv/ledom9999")
   console.log('')
   console.log('')
   console.log('╔[═════════════════════════════════════════════════════════════════]╗')
