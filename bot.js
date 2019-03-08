@@ -3449,6 +3449,11 @@ client.on('message', async message => {
     },86400000);
     }
 });
+
+
+
+
+
 client.on('message', message => {
     if (message.content === "$croles") {
     if(!message.channel.guild) return message.channel.send('**This Command Only For Servers !**')
