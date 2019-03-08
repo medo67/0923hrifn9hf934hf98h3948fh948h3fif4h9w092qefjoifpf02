@@ -3449,6 +3449,27 @@ client.on('message', async message => {
     },86400000);
     }
 });
+client.on('message', message => {
+    if (message.content === "#croles") {
+    if(!message.channel.guild) return message.channel.send('**This Command Only For Servers !**')
+            if (!message.member.hasPermission('MANAGE_ROLES')) return message.channel.send(`**${message.author.username} You Dont Have** ``MANAGE_ROLES`` **Premission**`);
+ 
+                     message.guild.createRole({ name: "Owner", color: "#اللون", permissions: [] })
+                     message.guild.createRole({ name: "CoOwner", color: "#اللون", permissions: [] })
+                     message.guild.createRole({ name: "Leader", color: "#اللون", permissions: [] })
+                     message.guild.createRole({ name: "CoLeader", color: "#اللون", permissions: [] })
+                     message.guild.createRole({ name: "King", color: "#اللون", permissions: [] })
+                     message.guild.createRole({ name: "Queen", color: "#اللون", permissions: [] })
+                     message.guild.createRole({ name: "Prince", color: "#اللون", permissions: [] })
+                     message.guild.createRole({ name: "Qween", color: "#اللون", permissions: [] })
+                     message.guild.createRole({ name: "Scurity", color: "#اللون", permissions: [] })
+                     message.guild.createRole({ name: "Gards", color: "#اللون", permissions: [] })
+       
+ 
+message.channel.sendMessage('**انتظر قليلا حتى انتهي من صناعة الرتب! **')
+}
+});
+ 
 
 
 
