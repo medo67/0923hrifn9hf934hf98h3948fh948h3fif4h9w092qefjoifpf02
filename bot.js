@@ -3477,7 +3477,7 @@ message.channel.sendMessage('**انتظر قليلا حتى انتهي من صن
 
 
 
-const { PREFIX, GOOGLE_API_KEY } = require('./config');
+
 
 
 
