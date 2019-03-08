@@ -3478,7 +3478,7 @@ message.channel.sendMessage('**انتظر قليلا حتى انتهي من صن
 
 
 const { PREFIX, GOOGLE_API_KEY } = require('./config');
-const youtube = new YouTube(GOOGLE_API_KEY);
+
 
 const queue = new Map();
 
