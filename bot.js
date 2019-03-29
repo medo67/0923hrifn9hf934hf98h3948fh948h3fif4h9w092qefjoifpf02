@@ -3823,7 +3823,6 @@ client.on('ready', () => {//لا تغير شي هنا
 
 const bot = new Discord.Client();
 const botconfig = JSON.parse(fs.readFileSync('./jsonfile/botconfig.json', 'utf8'));
-const prefix = "$"
 let gamesTime = 15000;
  
 bot.login(botconfig.token);
