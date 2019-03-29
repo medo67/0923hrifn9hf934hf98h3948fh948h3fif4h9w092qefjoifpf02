@@ -3828,7 +3828,7 @@ let gamesTime = 15000;
 bot.login(botconfig.token);
 const dailies = require("./dailies.json")
 const sqlite3 = require("sqlite3");
-const sql = new sqlite3.Database("./edited.sqlite");
+
  
 bot.on('ready', () => {
   console.log(`On Know`)
