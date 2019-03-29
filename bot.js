@@ -3822,17 +3822,14 @@ client.on('ready', () => {//لا تغير شي هنا
 
 
 const bot = new Discord.Client();
-const botconfig = JSON.parse(fs.readFileSync('./jsonfile/botconfig.json', 'utf8'));
 let gamesTime = 15000;
  
-bot.login(botconfig.token);
+
 const dailies = require("./dailies.json")
 const sqlite3 = require("sqlite3");
 
  
-bot.on('ready', () => {
-  console.log(`On Know`)
-})
+
 bot.on('message', message => {
   if (message.channel.type == "dm") return console.log(message.author.username + ` => type this (${message.content}) in Dm`);
   if (message.author.bot) return;
